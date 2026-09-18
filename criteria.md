@@ -25,7 +25,7 @@ contains the answer.
 **Why this target:**
 <!-- e.g. "One of my questions is about a topic only two documents mention, so
      I expect that one to be hard." -->
-
+My questions sometimes use different wording from the source threads. I allow one retrieval miss because those differences could make matching harder.
 ---
 
 ## 2. Every answer names a source
@@ -35,7 +35,7 @@ Every answer the system produces names at least one source document.
 **Why this target:**
 <!-- Why all five and not four? What about your setup makes that achievable —
      or what would have to go wrong for it not to be? -->
-
+Every retrieved chunk already includes its source filename, so I expect every generated answer to name a source, with no exceptions.
 ---
 
 ## 3. The relevance gate stops out-of-corpus questions
@@ -52,7 +52,7 @@ in at least 4 of 5 tries.
 **Why this target:**
 <!-- What did your distances look like when you set the cutoff in Milestone 4?
      Was there a clean gap, or did the two groups overlap? -->
-
+This system should answer from my documents, even when the model knows facts from elsewhere. I expect the gate to reject four of the five unrelated questions, allowing one mistake because an off-topic question might look related to my documents even when they do no contain its answer.
 ---
 
 ## 4. Something about your chunks
@@ -69,11 +69,12 @@ in at least 4 of 5 tries.
        - "No chunk is shorter than 200 characters, since anything below that
           in my corpus turned out to be a heading with no content under it." -->
 
+In all five chunks printed by python app.py chunks -n 5, every printed reply contains its full original text, with no reply cutoff at the beginning or the end. I will verify this by comparing each chunk with its source document.
 
 
 **Why this target:**
 
-
+My corpus contains short discussion replies, and cutting one midway could seperate advice from its explanation. I chose five out of five because my chunking strategy should always respect reply boundaries.
 
 ---
 
@@ -87,11 +88,11 @@ in at least 4 of 5 tries.
      present — anything, as long as it names a number or an observable
      outcome. -->
 
-
+For all five questions in questions.py, the generated answer gives the requested fact correctly when compared with the source document. Similar wording or formatting counts as correct. A refusal, missing fact, or a contradictory answer counts as a failure.
 
 **Why this target:**
 
-
+My five questions ask for facts explicitly stated in the documents. I chose five out of five because these questions does not require outside knowledge or speculation
 
 ---
 
